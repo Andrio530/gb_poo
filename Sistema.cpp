@@ -1,4 +1,10 @@
 #include "Sistema.h"
+
+#include "ComputingProcess.h"
+#include "WritingProcess.h"
+#include "ReadingProcess.h"
+#include "PrintingProcess.h"
+
 void Sistema::run()
 {
     while (true)
@@ -44,7 +50,11 @@ void Sistema::run()
 }
 void Sistema::criarProcesso()
 {
-    cout << "1) Computing 2) Writing 3) Reading 4) Printing\nTipo: ";
+    cout << "1) Computing\n"
+            "2) Writing\n"
+            "3) Reading\n"
+            "4) Printing\n"
+            "Tipo: ";
     string s;
     getline(cin, s);
     int t = stoi(s);
