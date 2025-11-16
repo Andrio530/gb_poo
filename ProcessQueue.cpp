@@ -1,6 +1,9 @@
 #include "ProcessQueue.h"
 #include "Process.h"
-#include "ProcessQueue.h"
+#include "ComputingProcess.h"
+#include "WritingProcess.h"
+#include "ReadingProcess.h"
+#include "PrintingProcess.h"
 ProcessQueue::ProcessQueue() : head(nullptr), tail(nullptr), count(0) {}
 ProcessQueue::~ProcessQueue() { clear(); }
 void ProcessQueue::push_back(Process *p)
