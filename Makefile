@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall
-OBJS = main.o Sistema.o Process.o ProcessQueue.o
+OBJS = main.o Sistema.o Process.o ProcessQueue.o ReadingProcess.o WritingProcess.o PrintingProcess.o ComputingProcess.o
 
 all: TrabalhoGrauB
 

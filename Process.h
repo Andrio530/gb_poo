@@ -7,10 +7,12 @@
 #include <vector>
 using namespace std;
 
-class Process {
+class Process
+{
 protected:
     int pid;
     static int next_pid;
+
 public:
     Process(int pid_override = -1);
     virtual ~Process() {}
@@ -21,49 +23,6 @@ public:
     virtual void printInfo() const = 0;
 };
 
+// TODO: ajeitar
 class ProcessQueue;
-
-class ComputingProcess : public Process {
-private:
-    string expr;
-public:
-    ComputingProcess(const string &expression, int pid_override = -1);
-    void execute() override;
-    string serialize() const override;
-    string typeName() const override;
-    void printInfo() const override;
-};
-
-class WritingProcess : public Process {
-private:
-    string expr;
-public:
-    WritingProcess(const string &expression, int pid_override = -1);
-    void execute() override;
-    string serialize() const override;
-    string typeName() const override;
-    void printInfo() const override;
-};
-
-class ReadingProcess : public Process {
-private:
-    ProcessQueue *queue;
-public:
-    ReadingProcess(ProcessQueue *q, int pid_override = -1);
-    void execute() override;
-    string serialize() const override;
-    string typeName() const override;
-    void printInfo() const override;
-};
-
-class PrintingProcess : public Process {
-private:
-    ProcessQueue *queue;
-public:
-    PrintingProcess(ProcessQueue *q, int pid_override = -1);
-    void execute() override;
-    string serialize() const override;
-    string typeName() const override;
-    void printInfo() const override;
-};
 #endif
