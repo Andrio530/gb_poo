@@ -1,17 +1,12 @@
 #ifndef PROCESS_QUEUE_H
 #define PROCESS_QUEUE_H
+#include "Nodo.h"
 #include "Process.h"
-struct Node
-{
-    Process *proc;
-    Node *next;
-    Node(Process *p) : proc(p), next(nullptr) {}
-    ~Node() { delete proc; }
-};
+
 class ProcessQueue
 {
 private:
-    Node *head, *tail;
+    Nodo<Process *> *head, *tail;
     int count;
 
 public:

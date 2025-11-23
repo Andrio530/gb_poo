@@ -6,6 +6,8 @@
 #define GB_POO_READINGPROCESS_H
 #include "Process.h"
 
+class ProcessQueue;
+
 class ReadingProcess : public Process
 {
 private:

@@ -8,12 +8,12 @@ ProcessQueue::ProcessQueue() : head(nullptr), tail(nullptr), count(0) {}
 ProcessQueue::~ProcessQueue() { clear(); }
 void ProcessQueue::push_back(Process *p)
 {
-  Node *n = new Node(p);
+  Nodo<Process *> *n = new Nodo<Process *>(p);
   if (!head)
     head = tail = n;
   else
   {
-    tail->next = n;
+    tail->setProximo(n);
     tail = n;
   }
   count++;
@@ -22,48 +22,46 @@ Process *ProcessQueue::pop_front()
 {
   if (!head)
     return nullptr;
-  Node *n = head;
-  Process *p = n->proc;
-  head = head->next;
+  Nodo<Process *> *n = head;
+  Process *p = n->getDado();
+  head = head->getProximo();
   if (!head)
     tail = nullptr;
-  n->proc = nullptr;
   delete n;
   count--;
   return p;
 }
 Process *ProcessQueue::find_by_pid(int pid) const
 {
-  Node *c = head;
+  Nodo<Process *> *c = head;
   while (c)
   {
-    if (c->proc->getPid() == pid)
-      return c->proc;
-    c = c->next;
+    if (c->getDado()->getPid() == pid)
+      return c->getDado();
+    c = c->getProximo();
   }
   return nullptr;
 }
 Process *ProcessQueue::remove_by_pid(int pid)
 {
-  Node *p = nullptr, *c = head;
+  Nodo<Process *> *p = nullptr, *c = head;
   while (c)
   {
-    if (c->proc->getPid() == pid)
+    if (c->getDado()->getPid() == pid)
     {
       if (p)
-        p->next = c->next;
+        p->setProximo(c->getProximo());
       else
-        head = c->next;
+        head = c->getProximo();
       if (c == tail)
         tail = p;
-      Process *proc = c->proc;
-      c->proc = nullptr;
+      Process *proc = c->getDado();
       delete c;
       count--;
       return proc;
     }
     p = c;
-    c = c->next;
+    c = c->getProximo();
   }
   return nullptr;
 }
@@ -72,20 +70,20 @@ int ProcessQueue::size() const { return count; }
 void ProcessQueue::printAll() const
 {
   cout << "--- Fila (" << count << ") ---\n";
-  Node *c = head;
+  Nodo<Process *> *c = head;
   while (c)
   {
-    c->proc->printInfo();
-    c = c->next;
+    c->getDado()->printInfo();
+    c = c->getProximo();
   }
   cout << "-----------------------\n";
 }
 void ProcessQueue::clear()
 {
-  Node *c = head;
+  Nodo<Process *> *c = head;
   while (c)
   {
-    Node *n = c->next;
+    Nodo<Process *> *n = c->getProximo();
     delete c;
     c = n;
   }
@@ -97,11 +95,11 @@ bool ProcessQueue::saveToFile(const string &fn) const
   ofstream ofs(fn);
   if (!ofs)
     return false;
-  Node *c = head;
+  Nodo<Process *> *c = head;
   while (c)
   {
-    ofs << c->proc->serialize() << "\n";
-    c = c->next;
+    ofs << c->getDado()->serialize() << "\n";
+    c = c->getProximo();
   }
   return true;
 }

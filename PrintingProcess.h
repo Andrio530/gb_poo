@@ -6,6 +6,8 @@
 #define GB_POO_PRINTINGPROCESS_H
 #include "Process.h"
 
+class ProcessQueue;
+
 class PrintingProcess : public Process
 {
 private:

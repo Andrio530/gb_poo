@@ -23,6 +23,4 @@ public:
     virtual void printInfo() const = 0;
 };
 
-// TODO: ajeitar
-class ProcessQueue;
 #endif
