@@ -33,3 +33,4 @@ make
 
 ## Autor
 Ândrio Gabriel Epping
+Lucca Jaroszeski Becker
